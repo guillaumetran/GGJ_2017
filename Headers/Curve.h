@@ -37,4 +37,6 @@ public:
     }
 };
 
+void setCurve(sf::RenderWindow &window, std::list<Curve *> lCurve, std::list<Curve *> rCurve);
+
 #endif //GGJ_CURVE_H

@@ -10,8 +10,15 @@
 
 class Entity {
 public:
+    enum TYPE {
+        PLAYER,
+        SPEAKER,
+        WAVES
+    };
     float _x, _y, _dx, _dy, _R, _angle;
     bool _life;
+    TYPE _type;
+
 public:
     Entity() {
         this->_life = true;
@@ -27,9 +34,16 @@ public:
         this->_R = radius;
     }
 
-    void draw(sf::RenderWindow &window) {
+    virtual void draw(sf::RenderWindow &window) {
         sf::CircleShape circle(_R);
-        circle.setFillColor(sf::Color::Black);
+        if (this->_type == PLAYER) {
+            circle.setFillColor(sf::Color::Red);
+        }
+        else {
+            circle.setFillColor(sf::Color(185, 101, 195));
+            circle.setOutlineThickness(25 - _R);
+            circle.setOutlineColor(sf::Color(185, 101, 195, 50));
+        }
         circle.setPosition(_x, _y);
         circle.setOrigin(_R, _R);
         window.draw(circle);
