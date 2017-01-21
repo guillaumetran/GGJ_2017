@@ -41,8 +41,8 @@ int main() {
     }
 
     std::list<Curve *> curve;
-    for (int i = 0; i < H; i++) {
-        Curve *_curve = new Curve(i);
+    for (int i = 0; i < 20; i++) {
+        Curve *_curve = new Curve(i, i * H / 20);
         curve.push_back(_curve);
     }
 

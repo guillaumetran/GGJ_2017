@@ -14,10 +14,10 @@ class Curve {
 public:
     int   _x;
     int   _y;
-    int   _deg;
+    float _deg;
     bool  _state;
 public:
-    Curve(int y) : _y(y) {
+    Curve(int y, int pos) : _y(pos) {
         _deg = _y;
         _state = true;
     }
@@ -25,21 +25,14 @@ public:
 
     void draw(sf::RenderWindow &window) {
         sf::CircleShape circle(2);
-        circle.setFillColor(sf::Color::Cyan);
+        circle.setFillColor(sf::Color::Red);
         circle.setPosition(_x, _y);
         circle.setOrigin(2, 2);
         window.draw(circle);
     }
 
     void    update() {
-        /*if (_deg >= 45)
-            _state = false;
-        if (_deg <= 0)
-            _state = true;
-        if (_state)*/
-            _deg++;
-        /*else
-            _deg--;*/
+        _deg += 0.05;
         _x = (sin(_deg) * 40) + 50;
     }
 };
