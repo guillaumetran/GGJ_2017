@@ -306,7 +306,7 @@ int main()
       e->update();
       e->anim.update();
 
-      if (e->life==false) {i=entities.erase(i); delete e;}
+      if (! e->life) { i=entities.erase(i); delete e;}
       else i++;
     }
 

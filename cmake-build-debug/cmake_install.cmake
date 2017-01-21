@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Install script for directory: /home/guillaume/CLionProjects/GGJ_2017
+=======
+# Install script for directory: /Users/killin_m/Documents/Projets/Personnel/C++/GGJ_2017
+>>>>>>> 5a84a5fe61b789b259de2d42218126afebeb9434
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -27,11 +31,6 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
-# Install shared libraries without execute permission?
-if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
-  set(CMAKE_INSTALL_SO_NO_EXE "1")
-endif()
-
 if(CMAKE_INSTALL_COMPONENT)
   set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
 else()
@@ -40,5 +39,9 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
+<<<<<<< HEAD
 file(WRITE "/home/guillaume/CLionProjects/GGJ_2017/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+=======
+file(WRITE "/Users/killin_m/Documents/Projets/Personnel/C++/GGJ_2017/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+>>>>>>> 5a84a5fe61b789b259de2d42218126afebeb9434
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
