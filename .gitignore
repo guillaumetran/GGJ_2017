@@ -28,5 +28,5 @@
 *.out
 *.app
 
-cmake_modules
+cmake-build-debug
 .idea

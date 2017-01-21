@@ -1,30 +1,74 @@
 #include <SFML/Graphics.hpp>
+#include <list>
+#include "Headers/Player.h"
+#include "Headers/Speaker.h"
+
+using namespace sf;
+
+const int W = 480;
+const int H = 720;
+
+void getMovement(Player *player) {
+    player->_move = false;
+    if (Keyboard::isKeyPressed(Keyboard::Right)) { player->_angle = 0; player->_move = true; }
+    if (Keyboard::isKeyPressed(Keyboard::Left)) { player->_angle = 180; player->_move = true; }
+    if (Keyboard::isKeyPressed(Keyboard::Up)) { player->_angle = 270; player->_move = true; }
+    if (Keyboard::isKeyPressed(Keyboard::Down)) { player->_angle = 90; player->_move = true; }
+    if (Keyboard::isKeyPressed(Keyboard::Up) && Keyboard::isKeyPressed(Keyboard::Right))
+    { player->_angle = 315; player->_move = true; }
+    if (Keyboard::isKeyPressed(Keyboard::Up) && Keyboard::isKeyPressed(Keyboard::Left))
+    { player->_angle = 225; player->_move = true; }
+    if (Keyboard::isKeyPressed(Keyboard::Down) && Keyboard::isKeyPressed(Keyboard::Right))
+    { player->_angle = 45; player->_move = true; }
+    if (Keyboard::isKeyPressed(Keyboard::Down) && Keyboard::isKeyPressed(Keyboard::Left))
+    { player->_angle = 135; player->_move = true; }
+}
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(640,480,32),"GGJ 2017");
-    sf::Font font;
-    font.loadFromFile("../OpenSans-Bold.ttf");
-    sf::Text text("Hello World", font, 11);
-    text.setCharacterSize(32);
-    text.setPosition(window.getSize().x/2 - text.getGlobalBounds().width/2,
-                     window.getSize().y/2 - text.getGlobalBounds().height/2);
-    sf::RectangleShape rectangle(sf::Vector2f(120, 50));
-    rectangle.setSize(sf::Vector2f(100, 100));
-    while(window.isOpen()){
-        sf::Event event;
+    sf::RenderWindow window(sf::VideoMode(W,H),"GGJ 2017");
+    window.setFramerateLimit(60);
 
-        while(window.pollEvent(event)) {
-            if(event.type == sf::Event::Closed){
-                window.close();
-            }
-            window.clear(sf::Color::Magenta);
-            window.draw(text);
-            window.draw(rectangle);
-            rectangle.move(1, 1);
-            window.display();
+    std::list<Entity *> entities;
 
-        }
+    Player  *player = new Player();
+    player->settings(W/2, H/2);
+
+    for (int i = 0; i < 15; i++) {
+        Speaker *speaker = new Speaker();
+        speaker->settings(rand() % W , rand() % H, 0, rand() % 20 + 5);
+        entities.push_back(speaker);
     }
 
+    entities.push_back(player);
+
+    while(window.isOpen()){
+        sf::Event event;
+        sf::Clock clock;
+
+        window.clear(sf::Color::White);
+        while(window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
+        getMovement(player);
+
+        for(auto i = entities.begin(); i != entities.end();)
+        {
+            Entity *e = *i;
+
+            e->update();
+            if (e->_life==false) {
+                i=entities.erase(i);
+                delete e;
+            }
+            else {
+                e->draw(window);
+                i++;
+            }
+        }
+        window.display();
+        clock.restart();
+    }
     return 0;
 }
