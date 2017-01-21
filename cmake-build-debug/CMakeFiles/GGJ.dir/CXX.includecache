@@ -6,7 +6,41 @@
 
 #IncludeRegexTransform: 
 
-/home/guillaume/CLionProjects/GGJ/main.cpp
+/home/guillaume/CLionProjects/GGJ_2017/Headers/Curve.h
+cmath
+-
+SFML/Graphics/Color.hpp
+-
+SFML/Graphics/CircleShape.hpp
+-
+SFML/Graphics/RenderWindow.hpp
+-
+
+/home/guillaume/CLionProjects/GGJ_2017/Headers/Entity.h
+SFML/Graphics/RenderWindow.hpp
+-
+SFML/Graphics/CircleShape.hpp
+-
+
+/home/guillaume/CLionProjects/GGJ_2017/Headers/Player.h
+iostream
+-
+Entity.h
+/home/guillaume/CLionProjects/GGJ_2017/Headers/Entity.h
+
+/home/guillaume/CLionProjects/GGJ_2017/Headers/Speaker.h
+Entity.h
+/home/guillaume/CLionProjects/GGJ_2017/Headers/Entity.h
+
+/home/guillaume/CLionProjects/GGJ_2017/main.cpp
 SFML/Graphics.hpp
 -
+list
+-
+Headers/Player.h
+/home/guillaume/CLionProjects/GGJ_2017/Headers/Player.h
+Headers/Speaker.h
+/home/guillaume/CLionProjects/GGJ_2017/Headers/Speaker.h
+Headers/Curve.h
+/home/guillaume/CLionProjects/GGJ_2017/Headers/Curve.h
 
