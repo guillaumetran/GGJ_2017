@@ -2,6 +2,7 @@
 #include <list>
 #include "Headers/Player.h"
 #include "Headers/Speaker.h"
+#include "Headers/Curve.h"
 
 using namespace sf;
 
@@ -39,11 +40,16 @@ int main() {
         entities.push_back(speaker);
     }
 
+    std::list<Curve *> curve;
+    for (int i = 0; i < H; i++) {
+        Curve *_curve = new Curve(i);
+        curve.push_back(_curve);
+    }
+
     entities.push_back(player);
 
     while(window.isOpen()){
         sf::Event event;
-        sf::Clock clock;
 
         window.clear(sf::Color::White);
         while(window.pollEvent(event)) {
@@ -67,8 +73,15 @@ int main() {
                 i++;
             }
         }
+        for(auto i = curve.begin(); i != curve.end();)
+        {
+            Curve *c = *i;
+            c->update();
+            c->draw(window);
+            i++;
+        }
+
         window.display();
-        clock.restart();
     }
     return 0;
 }
