@@ -6,6 +6,7 @@
 #define GGJ_PLAYER_H
 
 #include <iostream>
+#include <cmath>
 #include "Entity.h"
 
 class Player : public Entity {

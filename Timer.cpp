@@ -2,7 +2,7 @@
 // Created by Maxime Killinger on 21/01/2017.
 //
 
-#include "Timer.h"
+#include "Headers/Timer.h"
 
 Timer::Timer()
 {
