@@ -53,4 +53,6 @@ public:
     }
 };
 
+void getMovement(Player *player);
+
 #endif //GGJ_PLAYER_H

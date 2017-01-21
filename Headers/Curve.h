@@ -15,11 +15,10 @@ public:
     int   _x;
     int   _y;
     float _deg;
-    bool  _state;
+    bool  _left;
 public:
-    Curve(int y, int pos) : _y(pos) {
+    Curve(int y, int pos, bool left) : _y(pos), _left(left) {
         _deg = _y;
-        _state = true;
     }
     virtual ~Curve() {}
 
@@ -32,8 +31,13 @@ public:
     }
 
     void    update() {
+        int offset;
         _deg += 0.05;
-        _x = (sin(_deg) * 40) + 50;
+        if (_left)
+            offset = 50;
+        else
+            offset = 420;
+        _x = (sin(_deg) * 40) + offset;
     }
 };
 

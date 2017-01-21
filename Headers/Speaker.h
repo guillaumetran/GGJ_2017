@@ -30,7 +30,7 @@ public:
             _R--;
         _y += 5;
         if (_y >= 720)
-            _y = 0;
+            _life = false;
     }
 
     void draw(sf::RenderWindow &window) {
