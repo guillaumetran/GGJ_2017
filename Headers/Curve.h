@@ -22,7 +22,7 @@ public:
         _y = pos;
         _R = 20;
         _deg = 0;
-        _nextDrop = rand() % 150 + 10;
+        _nextDrop = rand() % 300 + 10;
     }
     virtual ~Curve() {}
 
@@ -34,20 +34,20 @@ public:
 
         _nextDrop--;
         if (_nextDrop <= 0) {
-            _nextDrop = rand() % 150 + 10;
-            _deg = rand() % 100;
+            _nextDrop = rand() % 300 + 10;
+            _deg = rand() % 150;
             if (!_left)
                 _deg *= -1;
         }
         if (_left) {
-            offset = 0;
+            offset = 1;
             if (_deg > -40)
-                _deg -= 0.5;
+                _deg -= 2;
         }
         else {
-            offset = 480;
+            offset = 479;
             if (_deg < 40)
-                _deg += 0.5;
+                _deg += 2;
         }
         _x = _deg + offset;
     }

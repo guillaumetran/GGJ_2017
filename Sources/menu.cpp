@@ -2,12 +2,12 @@
 // Created by Hugo Lackermaier on 22/01/2017.
 //
 
-#include "Menu.h"
+#include "../Headers/Menu.h"
 
 
 Menu::Menu(float width, float height)
 {
-    if (!font.loadFromFile("../Neon_Glow.ttf"))
+    if (!font.loadFromFile("../Assets/Neon_Glow.ttf"))
     {
         // handle error
     }
