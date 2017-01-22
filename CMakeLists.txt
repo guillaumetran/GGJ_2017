@@ -8,6 +8,7 @@ set(SOURCE_FILES main.cpp
         Sources/Player.cpp
         Sources/Timer.cpp
         Sources/Game.cpp
+        Sources/gameover.cpp
         Sources/menu.cpp)
 add_executable(GGJ ${SOURCE_FILES})
 

@@ -13,6 +13,7 @@
 #include "../Headers/Curve.h"
 #include "../Headers/Speaker.h"
 #include "../Headers/Drop.h"
+#include "../Headers/Game.h"
 
 using namespace sf;
 

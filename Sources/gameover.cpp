@@ -11,7 +11,7 @@ void gameover(Timer T, float width, float height, sf::RenderWindow &window)
     sf::Font font;
     sf::Text txt;
     sf::Text txt_Game_Over;
-
+    font.loadFromFile("../Assets/Neon_Glow.ttf");
     txt.setFont(font);
     txt.setCharacterSize(100);
     txt.setColor(sf::Color::Red);
@@ -19,11 +19,14 @@ void gameover(Timer T, float width, float height, sf::RenderWindow &window)
     txt.setPosition(width / 2 - 100, height / 3 * 1);
 
     txt.setFont(font);
-    txt.setCharacterSize(100);
+    txt.setCharacterSize(50);
     txt.setColor(sf::Color::Red);
     txt.setString("GAME OVER");
     txt.setPosition(width / 2 - 100, height / 3 * 2);
-
-    window.draw(txt);
-    window.draw(txt_Game_Over);
+    while (window.isOpen()) {
+        window.clear(sf::Color::Black);
+        window.draw(txt);
+        window.draw(txt_Game_Over);
+        window.display();
+    }
 }
