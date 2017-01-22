@@ -19,6 +19,7 @@ public:
     Timer               &operator=(const Timer &other);
 
     unsigned long       elapsedTime();
+    unsigned long       elapsedTime(int a);
     bool                isTimeout(unsigned long seconds);
     void                reinit();
 };

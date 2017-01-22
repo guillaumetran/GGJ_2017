@@ -2,7 +2,7 @@
 // Created by Maxime Killinger on 21/01/2017.
 //
 
-#include "Headers/Timer.h"
+#include "../Headers/Timer.h"
 
 Timer::Timer()
 {
@@ -29,12 +29,17 @@ bool        Timer::isTimeout(unsigned long seconds)
     return (seconds - 1) >= elapsedTime();
 }
 
+unsigned long   Timer::elapsedTime(int a)
+{
+    return ((unsigned long) clock() - this->_beginTime) / (CLOCKS_PER_SEC / a);
+}
+
 unsigned long   Timer::elapsedTime()
 {
-    return ((unsigned long) clock() - _beginTime) / (CLOCKS_PER_SEC / 100);
+    this->elapsedTime(1);
 }
 
 void        Timer::reinit()
 {
-    _beginTime = clock();
+    this->_beginTime = clock();
 }

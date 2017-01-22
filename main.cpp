@@ -1,8 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <list>
+#include <iostream>
 #include "Headers/Player.h"
 #include "Headers/Speaker.h"
 #include "Headers/Curve.h"
+#include "Headers/Timer.h"
 
 using namespace sf;
 
@@ -23,7 +25,17 @@ int main() {
     std::list<Curve *> rCurve;
     std::list<Entity *> entities;
     Player  *player = new Player();
+    unsigned long   k(0);
+    Timer           T;
+    sf::Text        score;
+    sf::Font        scoreType;
 
+    std::string str = std::to_string(k);
+    score.setString(str);
+    scoreType.loadFromFile("../Assets/score.ttf");
+    score.setFont(scoreType);
+    score.setCharacterSize(32);
+    score.setFillColor(sf::Color::Red);
     player->settings(W/2, H * 3/4);
     for (int i = 0; i < 15; i++) {
         Speaker *speaker = new Speaker();
@@ -54,13 +66,19 @@ int main() {
             for(auto b:entities) {
                 if (a->_type == Entity::PLAYER && b->_type == Entity::SPEAKER)
                     if ( isCollide(a,b) )
+                    {
+                        T.reinit();
+                        k = 0;
+                        str = std::to_string(k);
+                        score.setString(str);
                         player->settings(W/2, H * 3/4);
+                    }
             }
         for(auto i = entities.begin(); i != entities.end();) {
             Entity *e = *i;
 
             e->update();
-            if (e->_life==false) {
+            if (!e->_life) {
                 if (e->_type == Entity::SPEAKER) {
                     Speaker *speaker = new Speaker();
                     speaker->settings((rand() % (W - 200)) + 100, rand() % 50, 0, rand() % 20 + 5);
@@ -74,7 +92,14 @@ int main() {
                 i++;
             }
         }
+        if (T.elapsedTime() > k)
+        {
+            k = T.elapsedTime(1000);
+            str = std::to_string(k);
+            score.setString(str);
+        }
         setCurve(window, lCurve, rCurve);
+        window.draw(score);
         window.display();
     }
     return 0;
