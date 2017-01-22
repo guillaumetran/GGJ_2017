@@ -43,8 +43,8 @@ int game(sf::RenderWindow &window) {
     score.setColor(sf::Color::Cyan);
     drop->settings((rand() % (W - 200)) + 100, rand() % 50, 0, 15);
     entities.push_back(drop);
-    player->settings(W / 2, H * 3 / 4, 0, 20);
-    for (int i = 0; i < 1; i++) {
+    player->settings(W / 2, H * 3 / 4, 0, 10);
+    for (int i = 0; i < 5; i++) {
         Speaker *speaker = new Speaker();
         speaker->settings((rand() % (W - 200)) + 100, (rand() % H) * -4 , 0, rand() % 25 + 5);
         entities.push_back(speaker);
@@ -76,7 +76,7 @@ int game(sf::RenderWindow &window) {
             for (auto b:entities) {
                 if (a->_type == Entity::PLAYER && (b->_type == Entity::SPEAKER || b->_type == Entity::WAVES))
                     if (isCollide(a, b)) {
-                        player->settings(W / 2, H * 3 / 4, 0, 20);
+                        player->settings(W / 2, H * 3 / 4, 0, 10);
                         T.set_points(0);
                     }
                 if (a->_type == Entity::PLAYER && b->_type == Entity::DROP) {

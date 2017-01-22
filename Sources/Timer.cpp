@@ -8,7 +8,7 @@
 Timer::Timer()
 {
     reinit();
-    _points = 100;
+    _points = 0;
 }
 
 Timer::Timer(const Timer &other)
