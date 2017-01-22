@@ -35,7 +35,10 @@ public:
         _nextDrop--;
         if (_nextDrop <= 0) {
             _nextDrop = rand() % 300 + 10;
-            _deg = rand() % 150;
+            if (_speed <= 100)
+            _deg = rand() % (_speed + 50);
+            else
+                _deg = rand() % 150;
             if (!_left)
                 _deg *= -1;
         }

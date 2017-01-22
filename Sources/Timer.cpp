@@ -9,6 +9,7 @@ Timer::Timer()
 {
     reinit();
     _points = 0;
+    _record = 0;
 }
 
 Timer::Timer(const Timer &other)

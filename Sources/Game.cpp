@@ -96,7 +96,7 @@ int game(sf::RenderWindow &window) {
                     if (isCollide(a, b)) {
                         coin.play();
                         T.set_points(T.get_points() + 1);
-                        b->settings((rand() % (W - 200)) + 100, rand() % H);
+                        b->settings((rand() % (W - 200)) + 100, rand() % (H - 40) + 40);
                     }
                 }
             }
@@ -104,6 +104,8 @@ int game(sf::RenderWindow &window) {
             Entity *e = *i;
             if (e->_type == Entity::SPEAKER) {
                 e->_speed = T.get_points() + 1;
+                if (T.get_points() > T._record)
+                    T._record =  T.get_points();
             }
             e->update();
             if (!e->_life) {
@@ -122,6 +124,10 @@ int game(sf::RenderWindow &window) {
         score.setString(std::to_string(T.get_points()));
         setCurve(window, lCurve, rCurve, lines);
         window.draw(score);
+        score.setPosition(W - 100, 0);
+        score.setString(std::to_string(T._record));
+        window.draw(score);
+        score.setPosition(0, 0);
         window.display();
     }
     return 0;

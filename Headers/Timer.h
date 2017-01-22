@@ -14,6 +14,7 @@ private:
     unsigned long       _beginTime;
 
 public:
+    int      _record;
     Timer();
     ~Timer();
     Timer(const Timer &other);
