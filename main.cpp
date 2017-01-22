@@ -25,17 +25,14 @@ int main() {
     std::list<Curve *> rCurve;
     std::list<Entity *> entities;
     Player  *player = new Player();
-    unsigned long   k(0);
     Timer           T;
     sf::Text        score;
     sf::Font        scoreType;
 
-    std::string str = std::to_string(k);
-    score.setString(str);
     scoreType.loadFromFile("../Assets/score.ttf");
     score.setFont(scoreType);
     score.setCharacterSize(32);
-    score.setFillColor(sf::Color::Red);
+    score.setColor(sf::Color::Red);
     player->settings(W/2, H * 3/4);
     for (int i = 0; i < 15; i++) {
         Speaker *speaker = new Speaker();
@@ -65,12 +62,7 @@ int main() {
         for(auto a:entities)
             for(auto b:entities) {
                 if (a->_type == Entity::PLAYER && b->_type == Entity::SPEAKER)
-                    if ( isCollide(a,b) )
-                    {
-                        T.reinit();
-                        k = 0;
-                        str = std::to_string(k);
-                        score.setString(str);
+                    if ( isCollide(a,b) ) {
                         player->settings(W/2, H * 3/4);
                     }
             }
@@ -92,12 +84,7 @@ int main() {
                 i++;
             }
         }
-        if (T.elapsedTime() > k)
-        {
-            k = T.elapsedTime(1000);
-            str = std::to_string(k);
-            score.setString(str);
-        }
+        score.setString(std::to_string(T.elapsedTime()));
         setCurve(window, lCurve, rCurve);
         window.draw(score);
         window.display();
