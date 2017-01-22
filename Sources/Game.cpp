@@ -6,6 +6,7 @@
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Audio.hpp>
 #include <SFML/Window/Event.hpp>
 #include "../Headers/Entity.h"
 #include "../Headers/Timer.h"
@@ -37,6 +38,16 @@ int game(sf::RenderWindow &window) {
     sf::Text score;
     sf::Font scoreType;
     Drop    *drop = new Drop();
+
+    sf::SoundBuffer hit_sound;
+    hit_sound.loadFromFile("../Music/hit.ogg");
+    sf::Sound hit(hit_sound);
+    hit.setVolume(100);
+
+    sf::SoundBuffer music_coin;
+    music_coin.loadFromFile("../Music/coin.ogg");
+    sf::Sound coin(music_coin);
+    coin.setVolume(30);
 
     scoreType.loadFromFile("../Assets/score.ttf");
     score.setFont(scoreType);
@@ -77,11 +88,13 @@ int game(sf::RenderWindow &window) {
             for (auto b:entities) {
                 if (a->_type == Entity::PLAYER && (b->_type == Entity::SPEAKER || b->_type == Entity::WAVES))
                     if (isCollide(a, b)) {
+                        hit.play();
                         player->settings(W / 2, H * 3 / 4, 0, 10);
                         T.set_points(0);
                     }
                 if (a->_type == Entity::PLAYER && b->_type == Entity::DROP) {
                     if (isCollide(a, b)) {
+                        coin.play();
                         T.set_points(T.get_points() + 1);
                         b->settings((rand() % (W - 200)) + 100, rand() % H);
                     }
