@@ -1,8 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <list>
+#include <cmath>
 #include "Headers/Player.h"
 #include "Headers/Speaker.h"
-#include "Headers/Curve.h"
+#include "Headers/Menu.h"
 
 using namespace sf;
 
@@ -25,63 +26,93 @@ void getMovement(Player *player) {
     { player->_angle = 135; player->_move = true; }
 }
 
+
+
 int main() {
-    sf::RenderWindow window(sf::VideoMode(W,H),"GGJ 2017");
+    sf::RenderWindow window(sf::VideoMode(W, H), "GGJ 2017");
     window.setFramerateLimit(60);
 
     std::list<Entity *> entities;
 
-    Player  *player = new Player();
-    player->settings(W/2, H/2);
+    Player *player = new Player();
+    player->settings(W / 2, H / 2);
 
     for (int i = 0; i < 15; i++) {
         Speaker *speaker = new Speaker();
-        speaker->settings(rand() % W , rand() % H, 0, rand() % 20 + 5);
+        speaker->settings(rand() % W, rand() % H, 0, rand() % 20 + 5);
         entities.push_back(speaker);
-    }
-
-    std::list<Curve *> curve;
-    for (int i = 0; i < 20; i++) {
-        Curve *_curve = new Curve(i, i * H / 20);
-        curve.push_back(_curve);
     }
 
     entities.push_back(player);
 
-    while(window.isOpen()){
+    Menu menu(window.getSize().x, window.getSize().y);
+
+    while (window.isOpen()) {
         sf::Event event;
+        sf::Clock clock;
+
 
         window.clear(sf::Color::White);
-        while(window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
+        while (window.pollEvent(event)) {
+            if ((event.type == sf::Event::Closed)) {
                 window.close();
             }
-        }
-        getMovement(player);
+            switch (event.type) {
+                case sf::Event::KeyReleased:
+                    switch (event.key.code) {
+                        case sf::Keyboard::Up:
+                            menu.MoveUp();
+                            break;
 
-        for(auto i = entities.begin(); i != entities.end();)
-        {
-            Entity *e = *i;
+                        case sf::Keyboard::Down:
+                            menu.MoveDown();
+                            break;
 
-            e->update();
-            if (e->_life==false) {
-                i=entities.erase(i);
-                delete e;
-            }
-            else {
-                e->draw(window);
-                i++;
+                        case sf::Keyboard::Return:
+                            switch (menu.GetPressedItem()) {
+                                case 0:
+                                    std::cout << "Play button has been pressed" << std::endl;
+                                    break;
+                                case 1:
+                                    window.close();
+                                    break;
+                            }
+
+                            break;
+                    }
+
+                    break;
+                case sf::Event::Closed:
+                    window.close();
+
+                    break;
+
             }
         }
-        for(auto i = curve.begin(); i != curve.end();)
-        {
-            Curve *c = *i;
-            c->update();
-            c->draw(window);
-            i++;
-        }
+
+        window.clear();
+
+        menu.draw(window);
 
         window.display();
     }
-    return 0;
+
+        getMovement(player);
+
+    for (auto i = entities.begin(); i != entities.end();) {
+        Entity *e = *i;
+
+        e->update();
+        if (e->_life == false) {
+            i = entities.erase(i);
+            delete e;
+        } else {
+            e->draw(window);
+            i++;
+        }
+    }
+      //  window.display();
+
+        return (0);
+
 }
