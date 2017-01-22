@@ -25,11 +25,6 @@ Timer&      Timer::operator=(const Timer &other)
     return (*this);
 }
 
-bool        Timer::isTimeout(unsigned long seconds)
-{
-    return (seconds - 1) >= elapsedTime();
-}
-
 unsigned long   Timer::elapsedTime()
 {
     return ((unsigned long) clock() - this->_beginTime) / (CLOCKS_PER_SEC / 1000);
