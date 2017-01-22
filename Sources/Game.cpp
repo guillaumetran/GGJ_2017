@@ -12,6 +12,7 @@
 #include "../Headers/Player.h"
 #include "../Headers/Curve.h"
 #include "../Headers/Speaker.h"
+#include "../Headers/Drop.h"
 
 using namespace sf;
 
@@ -34,15 +35,18 @@ int game(sf::RenderWindow &window) {
     Timer T;
     sf::Text score;
     sf::Font scoreType;
+    Drop    *drop = new Drop();
 
     scoreType.loadFromFile("../Assets/score.ttf");
     score.setFont(scoreType);
     score.setCharacterSize(32);
-    score.setColor(sf::Color::Red);
-    player->settings(W / 2, H * 3 / 4);
-    for (int i = 0; i < 15; i++) {
+    score.setColor(sf::Color::Cyan);
+    drop->settings((rand() % (W - 200)) + 100, rand() % 50, 0, 15);
+    entities.push_back(drop);
+    player->settings(W / 2, H * 3 / 4, 0, 20);
+    for (int i = 0; i < 1; i++) {
         Speaker *speaker = new Speaker();
-        speaker->settings((rand() % (W - 200)) + 100, (rand() % H) * -4 , 0, rand() % 20 + 5);
+        speaker->settings((rand() % (W - 200)) + 100, (rand() % H) * -4 , 0, rand() % 25 + 5);
         entities.push_back(speaker);
     }
     for (int i = 0; i < 21; i++) {
@@ -72,12 +76,21 @@ int game(sf::RenderWindow &window) {
             for (auto b:entities) {
                 if (a->_type == Entity::PLAYER && (b->_type == Entity::SPEAKER || b->_type == Entity::WAVES))
                     if (isCollide(a, b)) {
-                        player->settings(W / 2, H * 3 / 4);
+                        player->settings(W / 2, H * 3 / 4, 0, 20);
+                        T.set_points(0);
                     }
+                if (a->_type == Entity::PLAYER && b->_type == Entity::DROP) {
+                    if (isCollide(a, b)) {
+                        T.set_points(T.get_points() + 1);
+                        b->settings((rand() % (W - 200)) + 100, rand() % H);
+                    }
+                }
             }
         for (auto i = entities.begin(); i != entities.end();) {
             Entity *e = *i;
-
+            if (e->_type == Entity::SPEAKER) {
+                e->_speed = T.get_points() + 1;
+            }
             e->update();
             if (!e->_life) {
                 if (e->_type == Entity::SPEAKER) {
@@ -92,7 +105,7 @@ int game(sf::RenderWindow &window) {
                 i++;
             }
         }
-        score.setString(std::to_string(T.elapsedTime()));
+        score.setString(std::to_string(T.get_points()));
         setCurve(window, lCurve, rCurve, lines);
         window.draw(score);
         window.display();

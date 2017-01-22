@@ -10,6 +10,7 @@
 class   Timer
 {
 private:
+    int      _points;
     unsigned long       _beginTime;
 
 public:
@@ -20,6 +21,14 @@ public:
 
     unsigned long       elapsedTime();
     void                reinit();
+
+    int get_points() const {
+        return _points;
+    };
+
+    void set_points(int _points);
+
+    void set_beginTime(unsigned long _beginTime);
 };
 
 #endif //GGJ_TIMER_H

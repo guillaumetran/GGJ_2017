@@ -28,7 +28,7 @@ public:
             _R++;
         else
             _R--;
-        _y += 5;
+        _y += 1 + _speed / 8;
         if (_y >= 720)
             _life = false;
     }

@@ -13,8 +13,10 @@ public:
     enum TYPE {
         PLAYER,
         SPEAKER,
-        WAVES
+        WAVES,
+        DROP
     };
+    int _speed;
     float _x, _y, _dx, _dy, _R, _angle;
     bool _life;
     TYPE _type;
@@ -22,6 +24,7 @@ public:
 public:
     Entity() {
         this->_life = true;
+        _speed = 1;
     }
     virtual ~Entity() {}
     virtual void update() {};

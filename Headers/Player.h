@@ -7,14 +7,18 @@
 
 #include <iostream>
 #include <cmath>
+#include <SFML/Graphics/Texture.hpp>
 #include "Entity.h"
 
 class Player : public Entity {
 public:
     bool _move;
+    sf::Texture texture;
 public:
     Player() : Entity() {
         _type = PLAYER;
+        texture.loadFromFile("../Assets/player.png");
+        texture.setSmooth(true);
     }
 
     virtual ~Player() {}
@@ -46,9 +50,9 @@ public:
     void draw(sf::RenderWindow &window) {
         sf::CircleShape circle(_R);
 
-        circle.setFillColor(sf::Color(58, 166, 212));
         circle.setPosition(_x, _y);
         circle.setOrigin(_R, _R);
+        circle.setTexture(&texture);
         window.draw(circle);
     }
 };

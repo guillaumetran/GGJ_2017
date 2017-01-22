@@ -8,15 +8,25 @@
 Timer::Timer()
 {
     reinit();
+    _points = 100;
 }
 
 Timer::Timer(const Timer &other)
 {
     this->_beginTime = other._beginTime;
+    _points = 0;
 }
 
 Timer::~Timer()
 {
+}
+
+void Timer::set_beginTime(unsigned long _beginTime) {
+    Timer::_beginTime = _beginTime;
+}
+
+void Timer::set_points(int _points) {
+    Timer::_points = _points;
 }
 
 Timer&      Timer::operator=(const Timer &other)
