@@ -39,14 +39,16 @@ public:
         if (this->_type == PLAYER) {
             circle.setFillColor(sf::Color::Red);
         }
-        else {
+        else{
             circle.setFillColor(sf::Color(185, 101, 195));
             circle.setOutlineThickness(25 - _R);
             circle.setOutlineColor(sf::Color(185, 101, 195, 50));
         }
-        circle.setPosition(_x, _y);
-        circle.setOrigin(_R, _R);
-        window.draw(circle);
+        if (this->_type != WAVES) {
+            circle.setPosition(_x, _y);
+            circle.setOrigin(_R, _R);
+            window.draw(circle);
+        }
     }
 };
 

@@ -38,12 +38,12 @@ public:
 
         circle.setPosition(_x, _y);
         circle.setOrigin(_R, _R);
-        circle.setFillColor(sf::Color(185, 101, 195));
+        circle.setFillColor(sf::Color(_R * 10, 140, _R * 10));
         circle.setOutlineThickness(25 - _R);
-        circle.setOutlineColor(sf::Color(185, 101, 195, 30));
+        circle.setOutlineColor(sf::Color(_R * 10, 140, _R * 10, 30));
         window.draw(circle);
         circle.setOutlineThickness(15 - _R);
-        circle.setOutlineColor(sf::Color(185, 101, 195, 60));
+        circle.setOutlineColor(sf::Color(_R * 10, 140, _R * 10, 60));
         window.draw(circle);
     }
 };
