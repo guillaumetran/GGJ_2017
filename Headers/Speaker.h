@@ -36,14 +36,15 @@ public:
     void draw(sf::RenderWindow &window) {
         sf::CircleShape circle(_R);
 
+        int col = rand() % 255;
         circle.setPosition(_x, _y);
         circle.setOrigin(_R, _R);
-        circle.setFillColor(sf::Color(_R * 10, 140, _R * 10));
+        circle.setFillColor(sf::Color(_R * 5, col, _R * 10));
         circle.setOutlineThickness(25 - _R);
-        circle.setOutlineColor(sf::Color(_R * 10, 140, _R * 10, 30));
+        circle.setOutlineColor(sf::Color(_R * 5, col, _R * 10, 30));
         window.draw(circle);
         circle.setOutlineThickness(15 - _R);
-        circle.setOutlineColor(sf::Color(_R * 10, 140, _R * 10, 60));
+        circle.setOutlineColor(sf::Color(_R * 5, col, _R * 10, 60));
         window.draw(circle);
     }
 };
